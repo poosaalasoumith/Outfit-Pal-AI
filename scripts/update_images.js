@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '.env.local' });
 require('dotenv').config({ path: '.env' });
-const { createClient } = require('@supabase/supabase-js');
+
 const fs = require('fs');
 const csv = require('csv-parser');
 
@@ -13,7 +13,8 @@ async function updateDb() {
     return;
   }
   
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const { getSupabase } = await import('../lib/supabaseClient.js');
+  const supabase = getSupabase();
   console.log('Updating images to Supabase...');
   
   const updates = [];

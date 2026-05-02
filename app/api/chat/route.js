@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+
 import { GoogleGenAI } from '@google/genai';
 import { loadDataset } from "../../lib/loadDataset";
 import sharp from "sharp";
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || '';
-const geminiApiKey = process.env.GEMINI_API_KEY || '';
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const geminiApiKey = process.env.GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey: geminiApiKey });
 
 if (!global.outfitMemory) global.outfitMemory = [];

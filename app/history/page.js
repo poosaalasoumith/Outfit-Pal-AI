@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Clock, Sparkles } from "lucide-react";
-import { supabase } from "../lib/supabaseClient";
+import { getSupabase } from "../lib/supabaseClient";
 
 export default function HistoryPage() {
   const [history, setHistory] = useState([]);
@@ -11,6 +11,13 @@ export default function HistoryPage() {
 
   useEffect(() => {
     async function fetchHistory() {
+      const supabase = getSupabase();
+      if (!supabase) {
+        console.warn("Supabase not initialized");
+        setIsLoading(false);
+        return;
+      }
+      
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         setIsLoading(false);

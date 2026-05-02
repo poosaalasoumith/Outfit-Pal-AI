@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Heart, Sparkles } from "lucide-react";
-import { supabase } from "../lib/supabaseClient";
+import { getSupabase } from "../lib/supabaseClient";
 
 export default function SavedPage() {
   const [saved, setSaved] = useState([]);
@@ -11,6 +11,13 @@ export default function SavedPage() {
 
   useEffect(() => {
     async function fetchSaved() {
+      const supabase = getSupabase();
+      if (!supabase) {
+        console.warn("Supabase not initialized");
+        setIsLoading(false);
+        return;
+      }
+      
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         setIsLoading(false);

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProductCard from '../../components/ProductCard';
 import SwipeCard from '../../components/SwipeCard';
 import Link from 'next/link';
-import { supabase } from '../lib/supabaseClient';
+import { getSupabase } from '../lib/supabaseClient';
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
@@ -26,6 +26,8 @@ export default function ChatPage() {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
     supabase.auth.getUser().then(({ data }) => {
       if (data?.user) setUser(data.user);
     });
@@ -63,6 +65,8 @@ export default function ChatPage() {
 
   const addToHistory = async (outfitData) => {
     if (!user) return;
+    const supabase = getSupabase();
+    if (!supabase) return;
     try {
       await supabase.from("outfit_history").insert([{ user_id: user.id, outfit: outfitData }]);
     } catch (err) {
@@ -195,6 +199,8 @@ export default function ChatPage() {
       alert("Please login to save outfits!");
       return;
     }
+    const supabase = getSupabase();
+    if (!supabase) return;
     try {
       await supabase.from("user_outfits").insert([{ user_id: user.id, product_ids: outfitData, type }]);
     } catch (err) {
@@ -229,7 +235,10 @@ export default function ChatPage() {
   }
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    const supabase = getSupabase();
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
     window.location.href = "/login";
   };
 

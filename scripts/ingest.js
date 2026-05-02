@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { getSupabase } from '../lib/supabaseClient.js';
 import { GoogleGenAI } from '@google/genai';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -25,10 +25,7 @@ if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_
   process.exit(1);
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+const supabase = getSupabase();
 const ai = new GoogleGenAI({ apiKey: geminiApiKey });
 
 const CSV_PATH = process.argv[2] || path.resolve(__dirname, '../outfit_pal_dataset.csv');

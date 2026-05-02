@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "../lib/supabaseClient";
+import { getSupabase } from "../lib/supabaseClient";
 import { useState } from "react";
 import { Sparkles, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -14,6 +14,13 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+    
+    const supabase = getSupabase();
+    if (!supabase) {
+      setMessage("Error: Supabase not initialized");
+      setLoading(false);
+      return;
+    }
     
     const { error } = await supabase.auth.signInWithOtp({ 
       email,
