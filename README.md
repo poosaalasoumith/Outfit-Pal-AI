@@ -184,7 +184,6 @@ https://outfit-pal-ai.vercel.app/
 ## 👨‍💻 Author
 
 Poosaala Soumith  
-B.Tech CSE  
 
 ---
 
