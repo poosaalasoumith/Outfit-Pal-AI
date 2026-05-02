@@ -174,6 +174,13 @@ http://localhost:3000
 
 ---
 
+## 🌐 Live Demo
+
+https://outfit-pal-ai.vercel.app/
+
+---
+
+
 ## 👨‍💻 Author
 
 Poosaala Soumith  
