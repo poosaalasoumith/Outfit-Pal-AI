@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@layer base {
+  body.theme-default {
+    background-color: #FAF9F6;
+    background: none;
+    min-height: 100vh;
+    color: #2C2724;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body.theme-sky {
+    background-color: #87CEEB;
+    background: linear-gradient(to bottom, #87CEEB, #ffffff);
+    min-height: 100vh;
+    color: #2C2724;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: rgba(168, 85, 247, 0.2);
+  }
+}
+
+/* Custom Scrollbar for sleek aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #e5e5e0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d1d0c9;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
