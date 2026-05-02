@@ -112,7 +112,7 @@ tailwind.config.js
 
 1. Clone the repository
 
-git clone https://github.com/your-username/outfit-pal-ai.git  
+git clone https://github.com/poosaalasoumith/Outfit-Pal-AI 
 cd outfit-pal-ai
 
 ---
